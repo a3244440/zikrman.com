@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZIKRMAN — премиальная одежда</title>
+  <meta name="description" content="ZIKRMAN — каталог премиальной одежды. Качество, сдержанный стиль, доставка по Казахстану.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Cormorant:ital,wght@0,500;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Хедер -->
+  <header class="header" id="header">
+    <a class="logo" href="#top">Zikrman</a>
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О бренде</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Премиальная одежда · Казахстан</p>
+      <h1 class="hero-title">Одежда, в которой <em>уверенность</em></h1>
+      <p class="hero-sub">
+        Сдержанные силуэты, плотные ткани и аккуратные детали.
+        Каждое изделие ZIKRMAN создано, чтобы служить долго и выглядеть безупречно.
+      </p>
+      <a class="hero-cta" href="#catalog">Смотреть каталог &rarr;</a>
+    </div>
+    <div class="hero-image">
+      <img
+        src="https://optim.tildacdn.one/stor3035-3131-4433-b566-666336333664/-/format/webp/99193216.jpg.webp"
+        alt="ZIKRMAN — изделие из новой коллекции"
+        fetchpriority="high">
+    </div>
+  </section>
+
+  <!-- Бегущая строка -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Zikrman</span><span>Новая коллекция</span><span>Доставка по Казахстану</span>
+      <span>Премиум качество</span><span>Zikrman</span><span>Новая коллекция</span>
+      <span>Доставка по Казахстану</span><span>Премиум качество</span>
+    </div>
+  </div>
+
+  <!-- Каталог -->
+  <main class="catalog" id="catalog">
+    <div class="section-head">
+      <h2 class="section-title">Каталог</h2>
+      <div class="filters" id="filters" role="group" aria-label="Фильтр по категориям"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <!-- О бренде -->
+  <section class="about" id="about">
+    <p class="about-quote">
+      «Мы верим, что настоящий стиль&nbsp;&mdash; это <strong>качество</strong>,
+      которое чувствуется в&nbsp;каждой детали»
+    </p>
+    <p class="about-note">Zikrman &mdash; с заботой о каждом изделии</p>
+  </section>
+
+  <!-- Футер -->
+  <footer class="footer" id="contacts">
+    <div class="footer-top">
+      <div class="footer-logo">Zikrman</div>
+      <div class="footer-links">
+        <a id="footer-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a id="footer-ig" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#catalog">Каталог</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="footer-city"></span>
+      <span>&copy; <span id="year"></span> ZIKRMAN. Все права защищены.</span>
+    </div>
+  </footer>
+
+  <!-- Модальное окно товара -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Карточка товара">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Закрыть">&times;</button>
+      <div class="modal-media" id="modal-media"></div>
+      <div class="modal-body">
+        <h3 class="modal-name" id="modal-name"></h3>
+        <div class="modal-price" id="modal-price"></div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div id="modal-sizes-wrap">
+          <p class="modal-sizes-label">Размер</p>
+          <div class="modal-sizes" id="modal-sizes"></div>
+        </div>
+        <div class="modal-order">
+          <a class="order-btn" id="order-btn" href="#" target="_blank" rel="noopener">
+            Заказать в WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
