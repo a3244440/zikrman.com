@@ -21,7 +21,7 @@ export default function Product() {
   useEffect(() => {
     if (product) document.title = `${product.name} — ${site.brand}`
     return () => {
-      document.title = `${site.brand} — каталог одежды`
+      document.title = `${site.brand} — мужская одежда`
     }
   }, [product])
 

@@ -1,6 +1,7 @@
 import { animate, AnimatePresence, motion, useMotionValue, useTransform } from 'motion/react'
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import { site } from '../config'
+import { AnimatedLogo, Logo } from './Logo'
 
 /* Простое общее состояние: закончилась ли заставка. Hero ждёт его, чтобы стартовать анимацию. */
 const SEEN_KEY = 'zikrman:intro-seen'
@@ -67,23 +68,13 @@ export function Preloader() {
           initial={{ clipPath: 'inset(0 0 0% 0)' }}
           transition={{ duration: 1, ease }}
         >
-          <div className="flex justify-between eyebrow text-paper/60">
-            <span>{site.brand}</span>
+          <div className="flex items-center justify-between eyebrow text-paper/60">
+            <Logo className="h-3.5 w-auto" />
             <span>{site.collection}</span>
           </div>
 
-          <div className="flex justify-center overflow-hidden">
-            {site.brand.split('').map((ch, i) => (
-              <motion.span
-                key={i}
-                className="font-display text-[16vw] leading-none font-medium tracking-tight md:text-[12vw]"
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.9, delay: 0.15 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {ch}
-              </motion.span>
-            ))}
+          <div className="flex justify-center">
+            <AnimatedLogo play className="h-auto w-[64vw] md:w-[38vw]" />
           </div>
 
           <div className="flex items-end justify-between">

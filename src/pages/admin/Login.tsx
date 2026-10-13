@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { site } from '../../config'
+import { Logo } from '../../components/Logo'
 import { useAuth } from '../../hooks/useAuth'
 import { DEMO_ADMIN } from '../../lib/api'
 import { isDemoMode } from '../../lib/supabase'
@@ -44,7 +44,7 @@ export default function Login() {
           transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
         />
         <div className="absolute inset-x-12 bottom-12 text-paper">
-          <p className="font-display text-7xl font-medium tracking-tight">{site.brand}</p>
+          <Logo className="h-16 w-auto" />
           <p className="eyebrow mt-3 text-paper/70">Панель управления каталогом</p>
         </div>
       </div>
