@@ -3,7 +3,8 @@ import { site } from '../config'
 const priceFormatter = new Intl.NumberFormat(site.locale, { maximumFractionDigits: 0 })
 
 export function formatPrice(value: number) {
-  return `${priceFormatter.format(value)} ${site.currency}`
+  const amount = priceFormatter.format(value)
+  return site.currencyBefore ? `${site.currency}${amount}` : `${amount} ${site.currency}`
 }
 
 export function discountPercent(price: number, oldPrice: number | null) {

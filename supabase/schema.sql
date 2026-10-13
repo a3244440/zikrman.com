@@ -33,6 +33,7 @@ create table if not exists public.products (
   old_price   integer check (old_price is null or old_price >= 0),
   description text not null default '',
   details     text[] not null default '{}',
+  size_chart  text not null default '',
   sizes       text[] not null default '{}',
   colors      jsonb not null default '[]'::jsonb,
   images      text[] not null default '{}',
@@ -43,6 +44,9 @@ create table if not exists public.products (
   created_at  timestamptz not null default now(),
   updated_at  timestamptz not null default now()
 );
+-- Для баз, созданных до появления таблицы размеров
+alter table public.products add column if not exists size_chart text not null default '';
+
 create index if not exists products_category_idx on public.products (category);
 create index if not exists products_order_idx on public.products (sort_order, created_at desc);
 

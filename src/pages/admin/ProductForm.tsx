@@ -16,6 +16,7 @@ const empty: ProductInput = {
   old_price: null,
   description: '',
   details: [],
+  size_chart: '',
   sizes: ['S', 'M', 'L', 'XL'],
   colors: [],
   images: [],
@@ -49,7 +50,7 @@ export default function ProductForm() {
           return
         }
         const { id: _id, created_at: _c, ...rest } = p
-        setForm(rest)
+        setForm({ ...rest, size_chart: rest.size_chart ?? '' })
         setSlugTouched(true)
       })
       .catch((e: Error) => setError(e.message))
@@ -225,6 +226,15 @@ export default function ProductForm() {
                 onChange={(e) => set('details', e.target.value.split('\n'))}
                 rows={4}
                 className="input resize-y"
+              />
+            </Field>
+            <Field label="Таблица размеров" hint="Показывается во вкладке «Размер и посадка». Пустая строка — новый блок.">
+              <textarea
+                value={form.size_chart}
+                onChange={(e) => set('size_chart', e.target.value)}
+                rows={5}
+                className="input resize-y font-mono text-xs"
+                placeholder={'M - 48\nОбхват груди: 108 см\nДлина брюк от пояса - 100 см'}
               />
             </Field>
           </Card>

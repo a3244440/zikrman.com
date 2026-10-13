@@ -20,14 +20,14 @@ npm run dev        # http://localhost:5173
 npm run build      # сборка в dist/
 ```
 
-Без настроек сайт работает в **демо-режиме**: каталог берётся из `src/data/demo-products.ts`, а правки в админке сохраняются только в вашем браузере.
+Без настроек сайт работает в **демо-режиме**: каталог берётся из `src/data/catalog.ts`, а правки в админке сохраняются только в вашем браузере.
 Вход в демо-админку: `admin@zikrman.com` / `zikrman`.
 
 ## Подключение базы (чтобы товары из админки видели все)
 
 1. Создайте проект на [supabase.com](https://supabase.com) (бесплатного тарифа хватит).
 2. **SQL Editor** → вставьте и выполните `supabase/schema.sql`. Он создаст таблицу товаров, права доступа и хранилище фото `products`.
-3. (Необязательно) выполните `supabase/seed.sql`, чтобы загрузить демо-товары.
+3. Выполните `supabase/seed.sql`, чтобы загрузить каталог ZIKR.
 4. **Authentication → Users → Add user**: создайте пользователя-администратора (email и пароль).
 5. Сделайте его админом в SQL Editor:
    ```sql
@@ -46,11 +46,13 @@ Vercel: Import Project → Framework «Vite» → добавить `VITE_SUPABAS
 
 ## Настройка под себя
 
-- `src/config.ts`: название, слоган, валюта (сейчас сом), текст верхней строки, контакты (WhatsApp, Instagram, Telegram, email) и категории.
-- Фото для главной и категорий: `public/images/demo/` (`hero.jpg` — главное фото, `season.jpg` — баннер «New Vibes»).
+- `src/config.ts`: название, слоган, валюта (сейчас $, как в каталоге Tilda), текст верхней строки, контакты (WhatsApp, телефон, Instagram, email) и категории.
+- Фото для главной: `public/images/brand/` (`hero.webp` — главное фото, `season.webp` — баннер «New Vibes», `detail-logo.webp` — блок «Миссия»).
 
-## Фото
+## Каталог
 
-Фото в `public/images/demo/` временные, это снимки с [Unsplash](https://unsplash.com) (бесплатная лицензия Unsplash). Замените их на фото ZIKRMAN:
-- товары: через админку;
-- главная и категории: положите свои файлы с теми же именами в `public/images/demo/` или поменяйте пути в `src/config.ts` и `src/pages/Home.tsx`.
+34 товара и их фото перенесены со старого сайта на Tilda (`zikrmanbishkek.tilda.ws`):
+- данные — `src/data/catalog.ts` (их же загружает `supabase/seed.sql`);
+- фото — `public/images/products/<slug>/`, сжаты в WebP до 1200 px.
+
+Описания на Tilda были почти у всех товаров пустые, поэтому короткие описания написаны по названию и фото. Таблицы размеров перенесены как есть. Цвета подобраны по фото.

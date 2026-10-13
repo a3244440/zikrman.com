@@ -2,9 +2,11 @@
 
 export const site = {
   brand: 'ZIKRMAN',
-  tagline: 'Одежда, которая движется вместе с тобой.',
+  tagline: 'Одежда для тех, кто помнит о главном.',
   collection: 'Новая коллекция 2026',
-  currency: 'сом',
+  // Цены в каталоге Tilda указаны в долларах
+  currency: '$',
+  currencyBefore: true,
   locale: 'ru-RU',
   topBarNote: 'Шоурум в Бишкеке · ул. Шабдан Баатыра, 97 · ежедневно 09:00–20:00',
   contacts: {
@@ -28,43 +30,43 @@ export interface Category {
 
 export const categories: Category[] = [
   {
-    slug: 'outerwear',
-    title: 'Верхняя одежда',
-    short: 'Куртки',
-    description: 'Куртки, бомберы и парки на каждый день.',
-    image: '/images/demo/leather-jacket-look.jpg',
+    slug: 'sport',
+    title: 'Спортивные костюмы',
+    short: 'Sport',
+    description: 'Костюмы на молнии для города и дороги.',
+    image: '/images/products/premium-sport/01.webp',
   },
   {
-    slug: 'hoodies',
-    title: 'Худи и свитшоты',
-    short: 'Худи',
-    description: 'Плотный хлопок и свободный крой.',
-    image: '/images/demo/sweatshirt-look.jpg',
+    slug: 'casual',
+    title: 'Костюмы Casual',
+    short: 'Casual',
+    description: 'Сдержанные костюмы на каждый день.',
+    image: '/images/brand/look-brown.webp',
   },
   {
     slug: 'tshirts',
     title: 'Футболки',
     short: 'Футболки',
-    description: 'База, которая сочетается со всем.',
-    image: '/images/demo/tee-man.jpg',
+    description: 'Каллиграфия, логотип ZIKR и база.',
+    image: '/images/products/futbolka-s-kalligrafiey-temnyy-purpurno-siniy/01.webp',
   },
   {
     slug: 'pants',
-    title: 'Брюки и джинсы',
-    short: 'Брюки',
-    description: 'Прямой и свободный силуэт.',
-    image: '/images/demo/jeans-2.jpg',
+    title: 'Штаны',
+    short: 'Штаны',
+    description: 'Лёгкие летние штаны из ткани «холодок».',
+    image: '/images/products/shtany-holodok-chernyy/01.webp',
   },
   {
-    slug: 'shirts',
-    title: 'Рубашки и костюмы',
-    short: 'Костюмы',
-    description: 'Для встреч, событий и офиса.',
-    image: '/images/demo/suit.jpg',
+    slug: 'umrah',
+    title: 'Умра и Хадж',
+    short: 'Умра и Хадж',
+    description: 'Камис и ихрам для поездки к святыням.',
+    image: '/images/products/muslinovyy-ihram-zikr/01.webp',
   },
 ]
 
-export const sizePresets = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '44', '46', '48', '50', '52', '54', 'ONE SIZE']
+export const sizePresets = ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL', '48', '50', '52', '54', '56', '58', 'ONE SIZE']
 
 export function categoryBySlug(slug: string | undefined) {
   return categories.find((c) => c.slug === slug)
