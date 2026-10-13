@@ -89,6 +89,11 @@ insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_typ
 values ('products', 'products', true, 10485760, array['image/webp', 'image/jpeg', 'image/png', 'image/avif'])
 on conflict (id) do update set public = true;
 
+-- Чтение списка файлов нужно админу, чтобы удалять и заменять фото (сами фото и так публичны)
+drop policy if exists "product images: admin read" on storage.objects;
+create policy "product images: admin read" on storage.objects
+  for select to authenticated using (bucket_id = 'products' and (select public.is_admin()));
+
 drop policy if exists "product images: admin insert" on storage.objects;
 create policy "product images: admin insert" on storage.objects
   for insert to authenticated with check (bucket_id = 'products' and (select public.is_admin()));
