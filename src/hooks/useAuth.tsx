@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabase'
 interface AuthState {
   admin: AdminUser | null
   ready: boolean
-  signIn: (email: string, password: string) => Promise<void>
+  signIn: (password: string) => Promise<void>
   signOut: () => Promise<void>
 }
 
@@ -31,8 +31,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const signIn = useCallback(async (email: string, password: string) => {
-    setAdmin(await apiSignIn(email, password))
+  const signIn = useCallback(async (password: string) => {
+    setAdmin(await apiSignIn(password))
   }, [])
 
   const signOut = useCallback(async () => {

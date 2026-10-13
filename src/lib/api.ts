@@ -1,4 +1,5 @@
 import { catalogProducts } from '../data/catalog'
+import { supabaseConfig } from '../config'
 import { isDemoMode, PRODUCT_BUCKET, supabase } from './supabase'
 import type { Product, ProductInput } from './types'
 
@@ -8,7 +9,7 @@ import type { Product, ProductInput } from './types'
 
 const DEMO_KEY = 'zikrman:demo-products-v2'
 const DEMO_SESSION_KEY = 'zikrman:demo-admin'
-export const DEMO_ADMIN = { email: 'admin@zikrman.com', password: 'zikrman' }
+export const DEMO_ADMIN_PASSWORD = '007'
 
 function readDemo(): Product[] {
   try {
@@ -163,10 +164,17 @@ export interface AdminUser {
   email: string
 }
 
+/**
+ * Supabase требует пароль от 6 символов, а админу удобнее короткий («007»),
+ * поэтому к введённому паролю всегда добавляется одна и та же приставка.
+ * В supabase/setup.sql пароль задаётся так же: 'zikr:' || пароль.
+ */
+const toAuthPassword = (password: string) => `zikr:${password}`
+
 export async function getAdmin(): Promise<AdminUser | null> {
   if (isDemoMode) {
     try {
-      return sessionStorage.getItem(DEMO_SESSION_KEY) ? { email: DEMO_ADMIN.email } : null
+      return sessionStorage.getItem(DEMO_SESSION_KEY) ? { email: supabaseConfig.adminEmail } : null
     } catch {
       return null
     }
@@ -179,21 +187,29 @@ export async function getAdmin(): Promise<AdminUser | null> {
   return { email: user.email ?? '' }
 }
 
-export async function signIn(email: string, password: string): Promise<AdminUser> {
+export async function signIn(password: string): Promise<AdminUser> {
   if (isDemoMode) {
-    if (email.trim().toLowerCase() !== DEMO_ADMIN.email || password !== DEMO_ADMIN.password)
-      throw new Error('Неверный email или пароль')
+    if (password !== DEMO_ADMIN_PASSWORD) throw new Error('Неверный пароль')
     sessionStorage.setItem(DEMO_SESSION_KEY, '1')
-    return { email: DEMO_ADMIN.email }
+    return { email: supabaseConfig.adminEmail }
   }
-  const { error } = await supabase!.auth.signInWithPassword({ email: email.trim(), password })
-  if (error) throw new Error('Неверный email или пароль')
+  const { error } = await supabase!.auth.signInWithPassword({
+    email: supabaseConfig.adminEmail,
+    password: toAuthPassword(password),
+  })
+  if (error) throw new Error(error.status === 429 ? 'Слишком много попыток, подождите пару минут' : 'Неверный пароль')
   const admin = await getAdmin()
   if (!admin) {
     await supabase!.auth.signOut()
     throw new Error('У этого аккаунта нет прав администратора')
   }
   return admin
+}
+
+export async function changePassword(newPassword: string) {
+  if (isDemoMode) throw new Error('В демо-режиме пароль не меняется')
+  const { error } = await supabase!.auth.updateUser({ password: toAuthPassword(newPassword) })
+  if (error) throw new Error(`Не удалось сменить пароль: ${error.message}`)
 }
 
 export async function signOut() {

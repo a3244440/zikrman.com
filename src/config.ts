@@ -20,6 +20,17 @@ export const site = {
   },
 }
 
+/**
+ * Подключение к Supabase (Project Settings → API). Оба значения публичные — их видит любой браузер,
+ * а права на изменение каталога проверяет сама база. Пусто — сайт работает в демо-режиме.
+ */
+export const supabaseConfig = {
+  url: '',
+  publishableKey: '',
+  // Вход в админку — только по паролю. Этот служебный email вводить не нужно: сайт подставляет его сам.
+  adminEmail: 'admin@zikrman.com',
+}
+
 export interface Category {
   slug: string
   title: string
