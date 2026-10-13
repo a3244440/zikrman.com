@@ -46,7 +46,7 @@ Vercel: Import Project → Framework «Vite» → добавить `VITE_SUPABAS
 
 ## Настройка под себя
 
-- `src/config.ts`: название, слоган, валюта (сейчас ₸), текст о доставке, контакты (WhatsApp, Instagram, Telegram, email) и категории.
+- `src/config.ts`: название, слоган, валюта (сейчас сом), текст верхней строки, контакты (WhatsApp, Instagram, Telegram, email) и категории.
 - Фото для главной и категорий: `public/images/demo/` (`hero.jpg` — главное фото, `season.jpg` — баннер «New Vibes»).
 
 ## Фото

@@ -349,7 +349,7 @@ function ProductTabs({ product }: { product: ProductT }) {
             )}
             {tab === 'delivery' && (
               <div className="max-w-lg space-y-3">
-                <p>{site.freeDeliveryNote}. Отправляем по городу и в регионы.</p>
+                <p>Доставляем по Бишкеку и в регионы. Вещь можно посмотреть и примерить в шоуруме: {site.topBarNote.replace('Шоурум в Бишкеке · ', '')}.</p>
                 <p>Обмен и возврат в течение 14 дней, если вещь не была в носке и сохранены бирки.</p>
               </div>
             )}

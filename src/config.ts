@@ -4,14 +4,15 @@ export const site = {
   brand: 'ZIKRMAN',
   tagline: 'Одежда, которая движется вместе с тобой.',
   collection: 'Новая коллекция 2026',
-  currency: '₸',
+  currency: 'сом',
   locale: 'ru-RU',
-  freeDeliveryNote: 'Бесплатная доставка при заказе от 30 000 ₸',
+  topBarNote: 'Шоурум в Бишкеке · ул. Шабдан Баатыра, 97 · ежедневно 09:00–20:00',
   contacts: {
-    // Номер в международном формате без «+» и пробелов, например 77011234567.
+    // Номер в международном формате без «+» и пробелов, например 996995571313.
     // Если пусто — кнопка «Заказать» ведёт в Instagram.
-    whatsapp: '',
-    instagram: 'https://instagram.com/zikrman',
+    whatsapp: '996702555599',
+    phone: '+996 995 571 313',
+    instagram: 'https://instagram.com/zikr.man.official',
     telegram: '',
     email: 'hello@zikrman.com',
   },
