@@ -76,7 +76,7 @@ function Hero() {
     >
       {/* Фото */}
       <motion.div
-        className="pointer-events-none absolute top-[14%] bottom-[6%] left-1/2 w-[58vw] -translate-x-1/2 sm:w-[38vw] lg:w-[25vw]"
+        className="pointer-events-none absolute top-[53%] left-1/2 aspect-[2/3] w-[min(86vw,calc(78svh*2/3))] -translate-x-1/2 -translate-y-1/2 sm:w-[min(60vw,calc(78svh*2/3))] lg:w-[min(30vw,calc(80svh*2/3))]"
         style={{ x: imgShiftX, y: imgShiftY, rotate: imgRotate }}
       >
         <motion.div
