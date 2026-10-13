@@ -110,9 +110,9 @@ function ProductMain({ product }: { product: ProductT }) {
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
         {/* Галерея */}
-        <div className="flex flex-col-reverse gap-3 md:flex-row">
+        <div className={`relative flex min-w-0 flex-col-reverse gap-3 ${images.length > 1 ? 'md:pl-27' : ''}`}>
           {images.length > 1 && (
-            <div className="flex gap-3 md:w-24 md:flex-col">
+            <div className="flex gap-3 overflow-x-auto [scrollbar-width:none] md:absolute md:inset-y-0 md:left-0 md:w-24 md:flex-col md:overflow-x-visible md:overflow-y-auto">
               {images.map((src, i) => (
                 <button
                   key={i}
@@ -131,7 +131,7 @@ function ProductMain({ product }: { product: ProductT }) {
             </div>
           )}
           <div
-            className="relative aspect-[4/5] flex-1 cursor-zoom-in overflow-hidden bg-stone"
+            className="relative aspect-[4/5] w-full cursor-zoom-in overflow-hidden bg-stone"
             onMouseMove={onZoomMove}
             onMouseLeave={() => setZoom(null)}
           >
@@ -272,9 +272,9 @@ function ProductMain({ product }: { product: ProductT }) {
 
           <div className="mt-8 grid grid-cols-3 gap-4 border-t border-mist pt-6">
             {[
-              { icon: TruckIcon, t: 'Доставка', d: 'По городу и в регионы' },
-              { icon: ReturnIcon, t: 'Обмен', d: '14 дней на возврат' },
-              { icon: LockIcon, t: 'Оплата', d: 'Картой или при получении' },
+              { icon: TruckIcon, t: 'Шоурум', d: 'Бишкек, Шабдан Баатыра, 97' },
+              { icon: ReturnIcon, t: 'Ежедневно', d: 'С 09:00 до 20:00' },
+              { icon: LockIcon, t: 'Заказ', d: 'Через WhatsApp' },
             ].map((f) => (
               <div key={f.t} className="flex items-start gap-2">
                 <f.icon size={20} className="mt-0.5 shrink-0" />
@@ -295,7 +295,7 @@ function ProductTabs({ product }: { product: ProductT }) {
   const tabs = [
     { id: 'details', label: 'Описание' },
     { id: 'fit', label: 'Размер и посадка' },
-    { id: 'delivery', label: 'Доставка и возврат' },
+    { id: 'delivery', label: 'Как купить' },
   ]
   const [tab, setTab] = useState(tabs[0].id)
   const sideImage = product.images[1] ?? product.images[0]
@@ -340,8 +340,9 @@ function ProductTabs({ product }: { product: ProductT }) {
               </>
             )}
             {tab === 'fit' && (
-              <div className="max-w-lg space-y-3">
+              <div className="max-w-2xl space-y-4">
                 <p>Доступные размеры: {product.sizes.length ? product.sizes.join(', ') : 'уточняйте у менеджера'}.</p>
+                {product.size_chart?.trim() && <SizeChart text={product.size_chart} />}
                 <p>
                   Не уверены в размере? Напишите нам свои параметры (рост, вес, обхват груди) — подскажем, какой подойдёт.
                 </p>
@@ -349,8 +350,8 @@ function ProductTabs({ product }: { product: ProductT }) {
             )}
             {tab === 'delivery' && (
               <div className="max-w-lg space-y-3">
-                <p>Доставляем по Бишкеку и в регионы. Вещь можно посмотреть и примерить в шоуруме: {site.topBarNote.replace('Шоурум в Бишкеке · ', '')}.</p>
-                <p>Обмен и возврат в течение 14 дней, если вещь не была в носке и сохранены бирки.</p>
+                <p>Вещь можно посмотреть и примерить в шоуруме: {site.topBarNote.replace('Шоурум в Бишкеке · ', '')}.</p>
+                <p>Условия доставки, оплаты и обмена уточняйте у менеджера в WhatsApp — ответим и всё подскажем.</p>
               </div>
             )}
           </motion.div>
@@ -368,5 +369,35 @@ function ProductTabs({ product }: { product: ProductT }) {
         </motion.div>
       )}
     </section>
+  )
+}
+
+/** Таблица размеров: блоки через пустую строку, первая строка блока — заголовок. */
+function SizeChart({ text }: { text: string }) {
+  const blocks = text
+    .split(/\n\s*\n/)
+    .map((b) => b.split('\n').map((l) => l.trim()).filter(Boolean))
+    .filter((b) => b.length > 0)
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      {blocks.map(([title, ...rows], i) => (
+        <div key={i} className="border border-mist p-4">
+          <p className="mb-2 text-xs font-semibold tracking-[0.12em] uppercase">{title}</p>
+          <dl className="space-y-1 text-xs">
+            {rows.map((row, j) => {
+              const m = row.match(/^(.+?)\s*[:–-]\s*(.+)$/)
+              return m ? (
+                <div key={j} className="flex justify-between gap-4 border-b border-dashed border-mist/80 pb-1">
+                  <dt className="text-muted">{m[1]}</dt>
+                  <dd className="shrink-0 font-medium">{m[2]}</dd>
+                </div>
+              ) : (
+                <p key={j}>{row}</p>
+              )
+            })}
+          </dl>
+        </div>
+      ))}
+    </div>
   )
 }

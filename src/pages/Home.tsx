@@ -23,11 +23,12 @@ export default function Home() {
     <>
       <Hero />
       <Marquee
-        items={['Новая коллекция 2026', site.brand, 'Свобода движения', 'Качество в деталях', 'Минимализм']}
+        items={['Помни, кто ты', site.brand, 'Стиль и скромность', 'Стамбул · Бишкек', 'Одежда с намерением']}
         className="bg-ink py-4 font-display text-2xl font-light tracking-wide text-paper uppercase md:py-5 md:text-4xl"
       />
       <Categories />
       <SeasonBanner />
+      <Mission />
       <Features />
       <Bestsellers />
       <NewArrivals />
@@ -90,7 +91,7 @@ function Hero() {
           transition={{ duration: 1.4, delay: 0.35, ease: [0.76, 0, 0.24, 1] }}
         >
           <motion.img
-            src="/images/demo/hero.jpg"
+            src="/images/brand/hero.webp"
             alt="Образ из новой коллекции"
             className="h-full w-full object-cover object-top grayscale"
             style={{ scale: imgScale, y: imgY }}
@@ -105,7 +106,7 @@ function Hero() {
       <motion.div className="container-x relative z-10 pt-6 md:pt-10" style={{ opacity: fade }}>
         {introDone && (
           <MaskText
-            text={'Одежда,\nкоторая движется\nвместе с тобой.'}
+            text={'Одежда\nдля тех, кто помнит\nо главном.'}
             className="eyebrow block leading-[2] text-ink"
             delay={0.9}
             stagger={0.05}
@@ -269,7 +270,7 @@ function SeasonBanner() {
           />
           <Reveal delay={0.2}>
             <p className="mt-6 max-w-xs text-base leading-relaxed text-ink/70">
-              Откройте всё новое — вещи, которые хочется носить каждый день.
+              Новые костюмы, камис и ихрам — для города, поездок и поклонения.
             </p>
             <Link to="/catalog?filter=new" className="btn-dark mt-8">
               Смотреть новинки
@@ -284,7 +285,7 @@ function SeasonBanner() {
           transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
         >
           <motion.img
-            src="/images/demo/season.jpg"
+            src="/images/brand/season.webp"
             alt="Новый сезон"
             loading="lazy"
             style={{ y }}
@@ -296,11 +297,50 @@ function SeasonBanner() {
   )
 }
 
+function Mission() {
+  return (
+    <section className="bg-ink py-24 text-paper md:py-32">
+      <div className="container-x grid gap-12 md:grid-cols-[1fr_1.4fr] md:items-center">
+        <Reveal>
+          <div className="relative aspect-[4/5] overflow-hidden">
+            <img
+              src="/images/brand/detail-logo.webp"
+              alt="Логотип ZIKR на футболке"
+              loading="lazy"
+              className="h-full w-full object-cover grayscale"
+            />
+          </div>
+        </Reveal>
+        <div>
+          <Reveal>
+            <p className="eyebrow mb-6 text-paper/50">Миссия бренда</p>
+          </Reveal>
+          <MaskText
+            as="h2"
+            text={'Помни, кто ты\nи для чего был создан'}
+            className="font-display text-4xl leading-tight font-medium md:text-6xl"
+          />
+          <Reveal delay={0.2}>
+            <p className="mt-8 max-w-xl leading-relaxed text-paper/70">
+              ZIKR — это больше, чем просто одежда. Это выражение веры, достоинства и стиля. Мы создаём мужскую
+              одежду, которая сочетает традиции Ислама с современным дизайном, позволяя каждому мужчине чувствовать
+              себя уверенно и комфортно в любой ситуации.
+            </p>
+            <p className="mt-4 max-w-xl leading-relaxed text-paper/70">
+              Каждая вещь — это напоминание (зикр) о вере, чистоте намерений и стремлении к лучшему.
+            </p>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const features = [
-  { icon: TruckIcon, title: 'Быстрая доставка', text: 'По городу и в регионы' },
-  { icon: ReturnIcon, title: 'Обмен и возврат', text: 'В течение 14 дней' },
-  { icon: BadgeIcon, title: 'Гарантия качества', text: 'Проверяем каждую вещь' },
-  { icon: LockIcon, title: 'Удобная оплата', text: 'Картой или при получении' },
+  { icon: TruckIcon, title: 'Шоурум в Бишкеке', text: 'ул. Шабдан Баатыра, 97' },
+  { icon: ReturnIcon, title: 'Ежедневно', text: 'С 09:00 до 20:00' },
+  { icon: BadgeIcon, title: 'Головной офис', text: 'Турция, Стамбул' },
+  { icon: LockIcon, title: 'Заказ в WhatsApp', text: '+996 702 555 599' },
 ]
 
 function Features() {

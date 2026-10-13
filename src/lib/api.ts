@@ -1,4 +1,4 @@
-import { demoProducts } from '../data/demo-products'
+import { catalogProducts } from '../data/catalog'
 import { isDemoMode, PRODUCT_BUCKET, supabase } from './supabase'
 import type { Product, ProductInput } from './types'
 
@@ -6,7 +6,7 @@ import type { Product, ProductInput } from './types'
 /* Демо-хранилище (localStorage) — используется без Supabase           */
 /* ------------------------------------------------------------------ */
 
-const DEMO_KEY = 'zikrman:demo-products'
+const DEMO_KEY = 'zikrman:demo-products-v2'
 const DEMO_SESSION_KEY = 'zikrman:demo-admin'
 export const DEMO_ADMIN = { email: 'admin@zikrman.com', password: 'zikrman' }
 
@@ -17,7 +17,7 @@ function readDemo(): Product[] {
   } catch {
     /* хранилище недоступно — отдаём исходные данные */
   }
-  return demoProducts
+  return catalogProducts
 }
 
 function writeDemo(products: Product[]) {

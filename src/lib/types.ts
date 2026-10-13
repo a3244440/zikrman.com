@@ -12,6 +12,8 @@ export interface Product {
   old_price: number | null
   description: string
   details: string[]
+  /** Таблица размеров обычным текстом, по строке на параметр */
+  size_chart: string
   sizes: string[]
   colors: ProductColor[]
   images: string[]

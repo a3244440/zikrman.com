@@ -10,7 +10,8 @@ const ease = [0.76, 0, 0.24, 1] as const
 const mainNav = [
   { to: '/catalog', label: 'Каталог' },
   { to: '/catalog?filter=new', label: 'Новинки' },
-  { to: '/catalog/outerwear', label: 'Куртки' },
+  { to: '/catalog/sport', label: 'Sport' },
+  { to: '/catalog/casual', label: 'Casual' },
   { to: '/catalog/tshirts', label: 'Футболки' },
 ]
 

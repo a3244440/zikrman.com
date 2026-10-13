@@ -36,7 +36,7 @@ export default function Login() {
     <div className="grid min-h-screen lg:grid-cols-2">
       <div className="relative hidden overflow-hidden bg-ink lg:block">
         <motion.img
-          src="/images/demo/season.jpg"
+          src="/images/brand/season.webp"
           alt=""
           className="absolute inset-0 h-full w-full object-cover opacity-60 grayscale"
           initial={{ scale: 1.2 }}
