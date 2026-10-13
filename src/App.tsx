@@ -11,6 +11,7 @@ import Product from './pages/Product'
 import Wishlist from './pages/Wishlist'
 import { RequireAdmin } from './pages/admin/AdminLayout'
 import Dashboard from './pages/admin/Dashboard'
+import ChangePassword from './pages/admin/ChangePassword'
 import Login from './pages/admin/Login'
 import ProductForm from './pages/admin/ProductForm'
 
@@ -57,6 +58,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path="products/new" element={<ProductForm />} />
           <Route path="products/:id" element={<ProductForm />} />
+          <Route path="password" element={<ChangePassword />} />
         </Route>
       </Routes>
     </MotionConfig>

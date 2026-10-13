@@ -3,14 +3,13 @@ import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '../../components/Logo'
 import { useAuth } from '../../hooks/useAuth'
-import { DEMO_ADMIN } from '../../lib/api'
+import { supabaseConfig } from '../../config'
 import { isDemoMode } from '../../lib/supabase'
 
 export default function Login() {
   const { admin, ready, signIn } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -23,7 +22,7 @@ export default function Login() {
     setBusy(true)
     setError('')
     try {
-      await signIn(email, password)
+      await signIn(password)
       navigate(from, { replace: true })
     } catch (err) {
       setError((err as Error).message)
@@ -63,35 +62,22 @@ export default function Login() {
           <h1 className="mt-8 font-display text-4xl font-medium">Вход для администратора</h1>
           <p className="mt-2 text-sm text-muted">Добавляйте и редактируйте товары каталога.</p>
 
-          <div className="mt-10 space-y-5">
-            <div>
-              <label className="label" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="username"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input"
-              />
-            </div>
-            <div>
-              <label className="label" htmlFor="password">
-                Пароль
-              </label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input"
-              />
-            </div>
+          <div className="mt-10">
+            {/* Скрытое имя пользователя — чтобы менеджер паролей браузера мог запомнить пароль */}
+            <input type="text" name="username" autoComplete="username" value={supabaseConfig.adminEmail} readOnly hidden />
+            <label className="label" htmlFor="password">
+              Пароль
+            </label>
+            <input
+              id="password"
+              type="password"
+              autoComplete="current-password"
+              autoFocus
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input text-lg tracking-[0.3em]"
+            />
           </div>
 
           {error && (
@@ -105,20 +91,10 @@ export default function Login() {
           </button>
 
           {isDemoMode && (
-            <div className="mt-8 border border-dashed border-mist p-4 text-xs leading-relaxed text-muted">
-              <b className="text-ink">Демо-режим.</b> База ещё не подключена. Вход: <code>{DEMO_ADMIN.email}</code> /{' '}
-              <code>{DEMO_ADMIN.password}</code>
-              <button
-                type="button"
-                onClick={() => {
-                  setEmail(DEMO_ADMIN.email)
-                  setPassword(DEMO_ADMIN.password)
-                }}
-                className="ml-2 underline"
-              >
-                подставить
-              </button>
-            </div>
+            <p className="mt-8 border border-dashed border-mist p-4 text-xs leading-relaxed text-muted">
+              <b className="text-ink">Демо-режим.</b> База ещё не подключена: изменения сохранятся только в этом
+              браузере.
+            </p>
           )}
         </motion.form>
       </div>

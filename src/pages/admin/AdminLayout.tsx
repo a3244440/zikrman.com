@@ -12,7 +12,7 @@ export function RequireAdmin() {
 }
 
 function AdminShell() {
-  const { admin, signOut } = useAuth()
+  const { signOut } = useAuth()
   const navigate = useNavigate()
 
   return (
@@ -31,7 +31,9 @@ function AdminShell() {
             <Link to="/" target="_blank" className="hidden text-muted hover:text-ink sm:inline">
               Открыть сайт ↗
             </Link>
-            <span className="hidden text-muted md:inline">{admin?.email}</span>
+            <Link to="/admin/password" className="hidden text-muted hover:text-ink md:inline">
+              Сменить пароль
+            </Link>
             <button
               onClick={async () => {
                 await signOut()
