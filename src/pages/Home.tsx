@@ -4,12 +4,12 @@ import {
   useScroll,
   useSpring,
   useTransform,
-  type MotionValue,
 } from 'motion/react'
 import { useRef, type MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, BadgeIcon, InstagramIcon, LockIcon, ReturnIcon, TruckIcon } from '../components/Icons'
 import { Marquee } from '../components/Marquee'
+import { AnimatedLogo } from '../components/Logo'
 import { useIntroDone } from '../components/Preloader'
 import { ProductCard, ProductGridSkeleton } from '../components/ProductCard'
 import { MaskText, Reveal } from '../components/Reveal'
@@ -44,9 +44,6 @@ export default function Home() {
 function Hero() {
   const ref = useRef<HTMLElement>(null)
   const introDone = useIntroDone()
-  const letters = site.brand.split('')
-  const center = (letters.length - 1) / 2
-
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12])
   const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '12%'])
@@ -66,8 +63,6 @@ function Hero() {
     mx.set((e.clientX - r.left) / r.width - 0.5)
     my.set((e.clientY - r.top) / r.height - 0.5)
   }
-
-  const play = introDone ? 'show' : 'hidden'
 
   return (
     <section
@@ -120,13 +115,10 @@ function Hero() {
         />
       </motion.div>
 
-      {/* Гигантские буквы — mix-blend-difference инвертирует их поверх фото */}
-      <div className="pointer-events-none relative z-10 flex flex-1 items-center justify-center mix-blend-difference">
-        <h1 className="flex font-display text-[17.5vw] leading-[0.85] font-medium tracking-[-0.02em] text-white lg:text-[16.5vw]">
-          <span className="sr-only">{site.brand}</span>
-          {letters.map((ch, i) => (
-            <HeroLetter key={i} ch={ch} offset={i - center} progress={scrollYProgress} play={play} />
-          ))}
+      {/* Гигантский логотип — mix-blend-difference инвертирует его поверх фото */}
+      <div className="pointer-events-none relative z-10 flex flex-1 items-center justify-center text-white mix-blend-difference">
+        <h1 className="w-[80vw] sm:w-[68vw] lg:w-[60vw] 2xl:w-[56vw]">
+          <AnimatedLogo play={introDone} progress={scrollYProgress} className="h-auto w-full" />
         </h1>
       </div>
 
@@ -172,35 +164,6 @@ function Hero() {
         />
       </motion.div>
     </section>
-  )
-}
-
-function HeroLetter({
-  ch,
-  offset,
-  progress,
-  play,
-}: {
-  ch: string
-  offset: number
-  progress: MotionValue<number>
-  play: 'show' | 'hidden'
-}) {
-  // При прокрутке буквы разлетаются от центра
-  const x = useTransform(progress, [0, 1], ['0vw', `${offset * 9}vw`])
-  const rotate = useTransform(progress, [0, 1], [0, offset * 4])
-  return (
-    <motion.span className="inline-block overflow-hidden" style={{ x, rotate }} aria-hidden>
-      <motion.span
-        className="inline-block"
-        variants={{ hidden: { y: '105%' }, show: { y: '0%' } }}
-        initial="hidden"
-        animate={play}
-        transition={{ duration: 1.2, delay: 0.15 + Math.abs(offset) * 0.09, ease }}
-      >
-        {ch}
-      </motion.span>
-    </motion.span>
   )
 }
 
@@ -454,7 +417,7 @@ function InstagramCta() {
           <MaskText
             as="h2"
             text={`@${site.contacts.instagram.replace(/\/+$/, '').split('/').pop()}`}
-            className="font-display text-[15vw] leading-none font-medium transition-opacity group-hover:opacity-70 md:text-[10vw]"
+            className="font-display text-[9vw] leading-none font-medium transition-opacity group-hover:opacity-70 md:text-[7vw]"
           />
         </a>
         <Reveal delay={0.2}>

@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { categories, site } from '../config'
 import { InstagramIcon, WhatsappIcon } from './Icons'
+import { Logo } from './Logo'
 
 export function Footer() {
   const ref = useRef<HTMLElement>(null)
@@ -77,12 +78,8 @@ export function Footer() {
       </div>
 
       <div className="container-x">
-        <motion.div
-          style={{ y }}
-          className="font-display text-[21vw] leading-[0.8] font-medium tracking-tight select-none lg:text-[19.5vw] 2xl:text-[280px]"
-          aria-hidden
-        >
-          {site.brand}
+        <motion.div style={{ y }} className="pb-6" aria-hidden>
+          <Logo className="h-auto w-full" />
         </motion.div>
       </div>
 

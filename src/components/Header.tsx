@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { categories, site } from '../config'
 import { useWishlist } from '../hooks/useWishlist'
+import { Logo } from './Logo'
 import { CloseIcon, HeartIcon, InstagramIcon, MenuIcon, SearchIcon, UserIcon } from './Icons'
 
 const ease = [0.76, 0, 0.24, 1] as const
@@ -92,8 +93,8 @@ export function Header() {
             ))}
           </nav>
 
-          <Link to="/" className="font-display text-2xl font-medium tracking-[0.08em] md:text-3xl" aria-label="На главную">
-            {site.brand}
+          <Link to="/" aria-label="На главную">
+            <Logo className="h-6 w-auto md:h-7" />
           </Link>
 
           <div className="flex items-center justify-end gap-1 sm:gap-4">

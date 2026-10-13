@@ -1,5 +1,5 @@
 import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { site } from '../../config'
+import { Logo } from '../../components/Logo'
 import { useAuth } from '../../hooks/useAuth'
 import { isDemoMode } from '../../lib/supabase'
 
@@ -20,8 +20,8 @@ function AdminShell() {
       <header className="sticky top-0 z-40 border-b border-mist bg-paper">
         <div className="container-x flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Link to="/admin" className="font-display text-xl font-medium tracking-[0.08em]">
-              {site.brand}
+            <Link to="/admin" aria-label="Админка">
+              <Logo className="h-5 w-auto" />
             </Link>
             <span className="bg-ink px-2 py-0.5 text-[9px] font-semibold tracking-[0.2em] text-paper uppercase">
               Админ
