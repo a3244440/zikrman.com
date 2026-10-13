@@ -76,7 +76,7 @@ function Hero() {
     >
       {/* Фото */}
       <motion.div
-        className="pointer-events-none absolute top-[14%] bottom-[6%] left-1/2 w-[58vw] -translate-x-1/2 sm:w-[38vw] lg:w-[25vw]"
+        className="pointer-events-none absolute top-[53%] left-1/2 aspect-[2/3] w-[min(86vw,calc(78svh*2/3))] -translate-x-1/2 -translate-y-1/2 sm:w-[min(60vw,calc(78svh*2/3))] lg:w-[min(30vw,calc(80svh*2/3))]"
         style={{ x: imgShiftX, y: imgShiftY, rotate: imgRotate }}
       >
         <motion.div
@@ -179,7 +179,7 @@ function Categories() {
             Весь каталог <ArrowRight size={14} />
           </Link>
         </div>
-        <div className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-5">
+        <div className="-mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-5">
           {categories.map((c, i) => (
             <Reveal key={c.slug} delay={i * 0.08} className="w-[70vw] shrink-0 snap-start sm:w-auto">
               <Link to={`/catalog/${c.slug}`} className="group block">
@@ -188,7 +188,7 @@ function Categories() {
                     src={c.image}
                     alt={c.title}
                     loading="lazy"
-                    className="h-full w-full object-cover grayscale transition-all duration-[1200ms] ease-out-expo group-hover:scale-110 group-hover:grayscale-0"
+                    className="h-full w-full object-cover transition-all duration-[1200ms] ease-out-expo group-hover:scale-110 [@media(hover:hover)]:grayscale [@media(hover:hover)]:group-hover:grayscale-0"
                   />
                 </div>
                 <h3 className="mt-4 font-display text-lg font-medium tracking-wide uppercase">{c.title}</h3>
