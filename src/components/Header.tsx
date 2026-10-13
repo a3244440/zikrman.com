@@ -18,7 +18,7 @@ export function TopBar() {
   return (
     <div className="bg-ink text-paper">
       <div className="container-x flex h-9 items-center justify-between text-[10px] font-medium tracking-[0.18em] uppercase">
-        <span className="truncate">{site.freeDeliveryNote}</span>
+        <span className="truncate">{site.topBarNote}</span>
         <div className="hidden items-center gap-3 sm:flex">
           <a href={site.contacts.instagram} target="_blank" rel="noreferrer" className="hover:opacity-70">
             Instagram

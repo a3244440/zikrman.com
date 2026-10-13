@@ -63,6 +63,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <a href={`tel:${site.contacts.phone.replace(/[^+\d]/g, '')}`} className="hover:text-paper">
+                {site.contacts.phone}
+              </a>
+            </li>
+            <li>
               <a href={`mailto:${site.contacts.email}`} className="hover:text-paper">
                 {site.contacts.email}
               </a>
