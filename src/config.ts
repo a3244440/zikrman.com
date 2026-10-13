@@ -25,8 +25,8 @@ export const site = {
  * а права на изменение каталога проверяет сама база. Пусто — сайт работает в демо-режиме.
  */
 export const supabaseConfig = {
-  url: '',
-  publishableKey: '',
+  url: 'https://afevegodnjsnwceirjjf.supabase.co',
+  publishableKey: 'sb_publishable_lQ9DHnA1rHA5koMkh2yW9Q_sFVMwRKk',
   // Вход в админку — только по паролю. Этот служебный email вводить не нужно: сайт подставляет его сам.
   adminEmail: 'admin@zikrman.com',
 }

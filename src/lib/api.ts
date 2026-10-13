@@ -54,7 +54,11 @@ export async function listProducts(): Promise<Product[]> {
     .select('*')
     .order('sort_order', { ascending: true })
     .order('created_at', { ascending: false })
-  if (error) throw error
+  if (error) {
+    // База недоступна — витрина не должна оставаться пустой, показываем встроенный каталог
+    console.warn('Supabase недоступен, показываем встроенный каталог:', error.message)
+    return sortProducts(catalogProducts)
+  }
   return data as Product[]
 }
 
@@ -197,7 +201,11 @@ export async function signIn(password: string): Promise<AdminUser> {
     email: supabaseConfig.adminEmail,
     password: toAuthPassword(password),
   })
-  if (error) throw new Error(error.status === 429 ? 'Слишком много попыток, подождите пару минут' : 'Неверный пароль')
+  if (error) {
+    if (error.status === 429) throw new Error('Слишком много попыток, подождите пару минут')
+    if (error.code === 'invalid_credentials' || error.status === 400) throw new Error('Неверный пароль')
+    throw new Error('Нет связи с базой, попробуйте позже')
+  }
   const admin = await getAdmin()
   if (!admin) {
     await supabase!.auth.signOut()
